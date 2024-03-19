@@ -8,10 +8,10 @@ WORKDIR /wgkex
 COPY BUILD WORKSPACE requirements.txt ./
 COPY wgkex ./wgkex
 
-RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
+RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64 && chmod +x bazelisk-linux-amd64
 ENV BAZELISK_CLEAN=true
 ENV USE_BAZEL_VERSION=7.1.1rc2
-RUN chmod +x bazelisk-linux-amd64
+
 RUN ["./bazelisk-linux-amd64", "build", "//wgkex/broker:app"]
 RUN ["./bazelisk-linux-amd64", "build", "//wgkex/worker:app"]
 
