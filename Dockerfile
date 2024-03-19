@@ -11,7 +11,9 @@ WORKDIR /wgkex
 COPY BUILD WORKSPACE requirements.txt ./
 COPY wgkex ./wgkex
 
-RUN ["bazel", "--bisect 7.0.2..HEAD", "test", "//wgkex/broker:app"]
+RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
+
+RUN ["bazelisk-linux-amd64", "--bisect 7.0.2..HEAD", "test", "//wgkex/broker:app"]
 RUN ["bazel", "build", "//wgkex/broker:app"]
 RUN ["bazel", "build", "//wgkex/worker:app"]
 RUN ["cp", "-rL", "bazel-bin", "bazel"]
