@@ -13,7 +13,8 @@ COPY wgkex ./wgkex
 
 RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
 RUN chmod +x bazelisk-linux-amd64
-RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..7.1.0", "test", "//wgkex/worker:app"]
+RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..7.1.0", "build", "//wgkex/broker:app"]
+RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..7.1.0", "build", "//wgkex/worker:app"]
 
 RUN ["bazel-7.0.2", "build", "//wgkex/broker:app"]
 RUN ["bazel-7.0.2", "build", "//wgkex/worker:app"]
