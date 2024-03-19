@@ -12,6 +12,7 @@ COPY BUILD WORKSPACE requirements.txt ./
 COPY wgkex ./wgkex
 
 RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
+ENV BAZELISK_CLEAN=true
 RUN chmod +x bazelisk-linux-amd64
 RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..HEAD", "build", "//wgkex/broker:app"]
 RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..HEAD", "build", "//wgkex/worker:app"]
