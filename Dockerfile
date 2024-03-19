@@ -11,14 +11,15 @@ WORKDIR /wgkex
 COPY BUILD WORKSPACE requirements.txt ./
 COPY wgkex ./wgkex
 
-RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
-RUN chmod +x bazelisk-linux-amd64
-RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..HEAD", "test", "//wgkex/broker:app"]
+
 
 RUN ["bazel-7.0.2", "build", "//wgkex/broker:app"]
 RUN ["bazel-7.0.2", "build", "//wgkex/worker:app"]
 RUN ["cp", "-rL", "bazel-bin", "bazel-7.0.2"]
 
+RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64
+RUN chmod +x bazelisk-linux-amd64
+RUN ["./bazelisk-linux-amd64", "--bisect=release-7.0.2..7.1.0", "test", "//wgkex/broker:app"]
 
 FROM python:3.11.8-slim-bookworm
 WORKDIR /wgkex
