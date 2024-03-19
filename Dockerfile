@@ -18,7 +18,7 @@ RUN ["./bazelisk-linux-amd64", "build", "//wgkex/worker:app"]
 FROM python:3.11.8-slim-bookworm
 WORKDIR /wgkex
 
-COPY --from=builder /bazel-bin/wgkex/bazel /wgkex/
+COPY --from=builder /wgkex/bazel-bin /wgkex/
 
 COPY entrypoint /entrypoint
 
