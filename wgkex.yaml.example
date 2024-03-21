@@ -13,6 +13,8 @@ domain_prefixes:
   - ffmuc_
   - ffdon_
   - ffwert_
+# [broker, worker] Option to enable the allwolist (default: /etc/allowlist.yaml) 
+allowlist: false
 # [broker] The dict of workers mapping their hostname to their respective weight for weighted peer distribution
 workers:
   gw04.in.ffmuc.net:

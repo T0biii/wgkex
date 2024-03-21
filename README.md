@@ -121,6 +121,11 @@ For further information, please see this [presentation on the architecture](http
 The `wgkex` configuration file defaults to `/etc/wgkex.yaml` ([Sample configuration file](wgkex.yaml.example)), however
 can also be overwritten by setting the environment variable `WGKEX_CONFIG_FILE`.
 
+- Allowlist file
+
+The `wgkex` allowlist defaults to `/etc/allowlist.yaml` ([Sample allowlist file](allowlist.yaml.example)), however
+can also be overwritten by setting the environment variable `WGKEX_ALLOWLIST_FILE`.
+
 ## Running the broker and worker
 
 ### Build using [Bazel](https://bazel.build)

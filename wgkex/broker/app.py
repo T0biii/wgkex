@@ -247,13 +247,13 @@ def handle_mqtt_message(
 
 
 def is_valid_wg_pubkey(pubkey: str) -> str:
-    """Verifies if key is a valid WireGuard public key or not.
+    """Verifies if key is a valid WireGuard public key or if enabled is on the allowlist or not.
 
     Arguments:
         pubkey: The key to verify.
 
     Raises:
-        ValueError: If the Wireguard Key is invalid.
+        ValueError: If the Wireguard Key is invalid or not on the allowlist.
 
     Returns:
         The public key.
@@ -261,6 +261,13 @@ def is_valid_wg_pubkey(pubkey: str) -> str:
     # TODO(ruairi): Refactor to return bool.
     if WG_PUBKEY_PATTERN.match(pubkey) is None:
         raise ValueError(f"Not a valid Wireguard public key: {pubkey}.")
+    
+
+    if config.get_config().allowlist:
+        if not pubkey in allowlist.get_pubkeys():
+            raise ValueError(f"This public key is not on the allowlist: {pubkey}.")
+    
+
     return pubkey
 
 
